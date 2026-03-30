@@ -1,212 +1,178 @@
-//Colors
-$bg: #000;
+@import "compass/css3";
 
-$tab-bg: #f9f9f9;
+@import url(https://fonts.googleapis.com/css?family=Sacramento);
 
-$f-color: #ba9872;
-$s-color: #967b5c;
-$t-color: #a38564;
-$fo-color: #f9f9f9;
-$fi-color: #e2e2e2;
-
-//Mixins
-@mixin posAbsolute($p) {
-  width: 100%;
-  height: 100%;
-  bottom: 0;
-  left: 0;
-  @if ($p == a) {
-    position: absolute;
-  } @else if($p == r) {
-    position: relative;
-  }
+html{
+  height:100%;
 }
-
-// General styles
-* {
-  padding: 0;
-  margin: 0;
+body{
   box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  width: 100%;
-  background-color: $bg;
-  font-size: 20px;
+  background: url('http://jomesthewedding.com/wp-content/themes/jomes/library/images/dots.gif') #CEECED;
+  font-family: 'Sacramento', cursive;
+  font-size: 1.4rem;
+  color:#2f2f2f;
+  text-align: left;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-
-  @media (max-height: 500px) {
-    margin: 25% 0 25% 0;
-  }
-}
-
-//Styles
-.envelop {
-  width: 15rem;
-  height: 10rem;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-
-  @media (min-width: 400px) and (max-width: 600px) {
-    width: 20rem;
-    height: 15rem;
-  }
-  @media (min-width: 600px) {
-    width: 25rem;
-    height: 20rem;
-  }
-  @media (min-width: 600px) and (min-height: 600px) {
-    bottom: 20%;
-  }
-
-  &__front-paper {
-    @include posAbsolute(a);
-    border-radius: 0.7rem;
-    border: 0.35rem solid $s-color;
-    background-color: $f-color;
-    clip-path: polygon(100% 0%, 50% 70%, 0% 0%, 0% 100%, 100% 100%);
-    z-index: 300;
-  }
-
-  &__back-paper {
-    @include posAbsolute(a);
-    border-radius: 0.7rem;
-    background-color: $s-color;
-    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 90%);
-    z-index: 100;
-  }
-
-  &__up-paper {
-    @include posAbsolute(r);
-    border-radius: 0.7rem;
-    background-color: $s-color;
-    z-index: 400;
-    clip-path: polygon(0% 0%, 100% 0%, 50% 81%);
-  }
-
-  &__sticker {
-    width: 100%;
-    height: 20%;
-    position: absolute;
-    margin: auto;
-    top: 30%;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 400;
-    background-image: url("https://www.freepnglogos.com/uploads/heart-png/emoji-heart-33.png");
-    background-color: $fo-color;
-    border: 0.3rem solid $fi-color;
-    background-size: 2rem;
-    background-position: center;
-
-    @media (max-width: 400px) {
-      background-size: 1.2rem;
-    }
-    @media (min-width: 600px) {
-      height: 15%;
-    }
-  }
-
-  &__false-sticker {
-    width: 20%;
-    height: 20%;
-    position: absolute;
-    margin: auto;
-    top: 30%;
-    left: 80%;
-    bottom: 0;
-    right: 0;
-    z-index: 300;
-    background-image: url("https://www.freepnglogos.com/uploads/heart-png/emoji-heart-33.png");
-    background-color: $fo-color;
-    border: 0.3rem solid $fi-color;
-    background-size: 2rem;
-    background-position: center;
-
-    @media (max-width: 400px) {
-      background-size: 1.2rem;
-    }
-    @media (min-width: 600px) {
-      height: 15%;
-    }
-  }
-
-  &__content {
-    @include posAbsolute(a);
-    z-index: 200;
-  }
-}
-
-.love-notes {
-  width: 100%;
-  height: 100%;
-  display: flex;
   flex-direction: column;
-  align-items: center;
+  height:100%;
+  perspective:1000px;
 }
-
-.note {
-  width: 95%;
-  height: 30%;
-  background-color: $tab-bg;
-  position: absolute;
-  overflow: hidden;
-  transition: height 0.5s, opacity 0.25s;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-
-  &:nth-child(1) {
-    bottom: 60%;
+.envelope{
+  background: darken(#E9978C, 5);
+  border-radius: 0 0 4px 4px;
+  width: 320px;
+  height: 320px;
+  min-height: 320px;
+  margin: 20px auto;
+  position:relative;
+  transition: all 0.3s cubic-bezier(.42,0,.58,1);
+  transform-origin: 50 50%;
+  //transform: scale(0.8);
+  //transform-style:preserve-3d;
+  &:before,
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    z-index:2;
   }
-
-  &:nth-child(2) {
-    bottom: 40%;
+  &:before{
+    left:0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 296px 0 0 300px;
+    border-color: transparent transparent transparent #E9978C;
   }
-
-  &:nth-child(3) {
-    bottom: 20%;
+  &:after{
+    right:0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 296px 300px;
+    border-color: transparent transparent #E9978C transparent;
   }
-
-  &:hover {
-    cursor: pointer;
-    height: 45%;
-  }
-
-  &__text {
-    font-family: "Sofia";
-    padding: 1rem;
-
-    p {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      text-align: center;
-
-      @media (min-width: 300px) and (max-width: 600px) {
-        font-size: 1.025rem;
+  &.open{
+    transform:rotateZ(7deg) translateY(130px) rotateY(-9deg);
+    .flap-outside{ 
+      top:-1px;
+      //transform:rotateX(180deg);
+      animation: open-flap 0.6s ease-in-out forwards;
+      //transition-delay: 0s;
+      .flap{
+        background: darken(#E9978C, 5);
       }
-      @media (min-width: 600px) {
-        font-size: 1.15rem;
+    }
+    .card{
+      transform: translateX(14%) translateY(-200px);
+      transition-delay:0.6s;
+    }
+  }
+  .card{
+    background:#ffffff;
+    position: absolute;
+    font-size:1.4rem;
+    overflow: hidden;
+    left: 0;
+    bottom:0;
+    width:70%;
+    height:85%;
+    padding: 10px 20px;
+    transform: translateX(14%);
+    transition: all 0.3s cubic-bezier(.42,0,.58,1) 0s;
+    z-index:1;
+  }
+  .flap-container{
+    border-radius: 4px;
+    overflow:hidden;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    transition: all 0.4s cubic-bezier(.18,.81,.76,.93) 0s;
+    z-index:3;
+  }
+  .flap-outside{
+    overflow-y: auto;
+    transform-origin: 50% 0;
+    animation-delay: 0.6s;
+    animation-fill-mode:backwards;
+    z-index: 4;
+    .flap{
+      background: #E9978C;
+      backface-visibility: hidden;
+      &:after{
+        background: darken(#E9978C, 5);
+        backface-visibility: hidden;
+        content:'';
+        display: block;
+        position: absolute;
+        transform: rotateX(180deg);
+        height:100%;
+        width:100%;
+        left:0;
+        top:0;
+        z-index:1;
       }
     }
   }
-}
-
-.scissors {
-  cursor: url("https://i.postimg.cc/GtLCdKxR/sisors.png"), pointer;
-  &:active {
-    cursor: url("https://i.postimg.cc/GtXQ7WPZ/pngwing-com.png"), pointer;
+  .flap-inside{
+    transform: rotateX(180deg);
+    border-radius: 0 0 4px 4px;
+    overflow:hidden;
+    .flap{
+      border-radius: 40px 40px 80px 40px;
+      border: 1px solid darken(#E9978C, 5);
+      margin-top: 20px;
+    }
+  }
+  .flap{
+    background: #E9978C;
+    border: 1px solid darken(#E9978C, 5);
+    border-radius:40px;
+    overflow: hidden;
+    width:300px;
+    height:300px;
+    position: absolute;
+    top:-50%;
+    left:50%;
+    margin: -20px 0 0 -151px;
+    transform: rotateZ(45deg);
+    transform-style: preserve-3d;
+    transition: all 0.8s ease 0s;
+    z-index:2;
+    .lining{
+      background: url('http://jomesthewedding.com/wp-content/themes/jomes/library/images/flyer-bouquet.jpg') 50% 50% #A3CAC0;
+      backface-visibility: hidden;
+      border-radius: 0 0 40px 0;
+      position: absolute;
+      top:0;
+      left:0;
+      width: 92%;
+      height:92%;
+    }
+  }
+  svg.string{
+    position:relative;
+    z-index:10;
   }
 }
 
-.cursor {
-  cursor: pointer;
+@keyframes open-flap {
+  0%   { 
+    transform:rotateX(0deg); 
+    z-index:4;
+  }
+  50%  { 
+    transform:rotateX(90deg); 
+    z-index: 0;
+  }
+  100% { 
+    transform:rotateX(180deg); 
+    z-index: 0;
+  }
 }
